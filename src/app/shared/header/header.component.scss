@@ -1,0 +1,36 @@
+.header {
+  height: 100px;
+  //background: #B40000;
+  width: 100%;
+  color: #fff;
+  //background-color: green;
+  background-image: url(/assets/images/navbar-background.png);
+  background-position: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+//@media all and (max-width: 600px) {
+//  .container-fluid {
+//    padding:0; /* Extend your menu really full width without padding of container-fluid */
+//  }
+//  .navbar-nav {
+//    margin:0; /* Center your menu with current 100% width available */
+//  }
+//  .navbar .nav > li {
+//    display: block;
+//  }
+//  .navbar .nav > li  img {
+//    margin: auto;
+//  }
+//}
+.logo-wrapper {
+  color:white;
+}
+.logo--image{
+  margin-top: 5px;
+
+}
+.logo-text{
+  margin-bottom: 5px;
+}
+

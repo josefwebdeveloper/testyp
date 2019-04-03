@@ -1,0 +1,94 @@
+<div class="feed-wrapper-main container">
+
+  <div class="category-wrapper-wrapper container">
+    <div class="category-wrapper">
+      <!--<div class="btn left-arrow" (click)="slideRight()"><img src="../../../../assets/icons/line-left-grey.png" alt="">-->
+      <!--</div>-->
+
+      <ul #categoryList>
+        <!--<li>-->
+        <!--<div class="button-text-wrapper">-->
+        <!--<div class="wrapper-button-category category-hover" routerLink="/">-->
+        <!--<img class="image__button-category" src="../../../../assets/icons/place_white.png" alt="">-->
+        <!--</div>-->
+        <!--<div class="button&#45;&#45;text">Location</div>-->
+        <!--</div>-->
+        <!--</li>-->
+
+        <!--<li>-->
+        <!--<div (click)="isSearch =! isSearch" class="button-text-wrapper">-->
+        <!--<div class="wrapper-button-category">-->
+        <!--<img class="image__button-category" src="../../../../assets/icons/search.png" alt="">-->
+        <!--</div>-->
+        <!--<div class="button&#45;&#45;text">Search</div>-->
+        <!--</div>-->
+        <!--</li>-->
+
+        <li *ngFor="let category of categories">
+
+          <div class="button-text-wrapper">
+            <div (click)="isSearch=false" class="wrapper-button-category category-hover"
+                 routerLink="/category/{{category.id}}"
+                 routerLinkActive="category-hover" [ngClass]="{'category-hover': category.isSelected}">
+              <img *ngIf="!category.isSelected" class="image__button-category" src="{{ category.image }}" alt="">
+              <img *ngIf="category.isSelected" class="image__button-category " src="{{ category.imageon }}" alt="">
+
+            </div>
+            <div class="button--text">{{category.name}}</div>
+          </div>
+
+        </li>
+      </ul>
+      <!--<div class="btn right-arrow" (click)="slideLeft()"><img src="../../../../assets/icons/line-right-red.png" alt="">-->
+      <!--</div>-->
+    </div>
+  </div>
+  <!--SEARCH CONTAINER-->
+
+  <div form *ngIf="isSearch" class="animated fadeInDown search-form input-group ">
+    <input [(ngModel)]="UrlInput" type="text" class="form-control" placeholder="Recipient's username"
+           aria-label="Recipient's username"
+           aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <button (click)="submitSearch()" class="btn btn-outline-secondary" type="submit" id="button-addon2">Search
+      </button>
+    </div>
+  </div>
+  <!--fake div-->
+  <div *ngIf="!isSearch" class="hidden  ">
+    <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"-->
+    <!--aria-describedby="button-addon2">-->
+    <!--<div class="input-group-append">-->
+    <!--<button class="btn btn-outline-secondary" type="button" id="button-addon2">ddd</button>-->
+    <!--</div>-->
+  </div>
+  <!-- end SEARCH CONTAINER-->
+  <!--[ngClass]="{'animated':isSearch,'slideInDown':isSearch}"-->
+  <!--routerLink="/product/{{product.id}}" routerLinkActive="active"-->
+  <ul class="feed-grid-wrapper animated fadeInDown">
+    <li class="col-6 col-lg-3 col-xs-6 col-md-3 col-sm-6 col-xl-3"
+        *ngFor="let product of products"
+        (click)="goToProductChangeStrategy(product.id)">
+      <div class=" flex-item card-image-wrapper"
+           [style.backgroundColor]="'#' + product.attributes.thumbnail.dominantcolor">
+        <img class="img-product " src="{{ product.attributes.thumbnail.url }}" alt="">
+        <div class="overlay text-overlay">
+          <div dir="rtl" class="text-dots">{{product.attributes.title}}</div>
+          <div>{{product.attributes.pricedisplay}}</div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="hasMore && !isLoading" class="show-more-wrapper">
+    <div class="btn btn-outline-light show-more-inner-wrapper" (click)="showMore()">
+      <img class="show-more-button" src="assets/images/more_btn.png" alt="">
+      <div class="show-more-text">Show More</div>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading && products != undefined && products.length > 0" class="loader-wrapper">
+    <div class="loader"></div>
+  </div>
+
+</div>

@@ -1,0 +1,153 @@
+<div class="product-main">
+  <div class="user-wrapper">
+    <!--<img src="../../../../assets/images/user.png" class="user__image"/>  -->
+    <img src="{{product?.attributes.memberimage}}" class="user__image"/>
+    <div class="user__name ">{{product?.attributes.membername}}</div>
+  </div>
+
+  <section class="mb-5" *ngIf="product" id="product">
+    <div class="product--container ">
+      <div class="product__image--info--container ">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xs-12">
+          <div class="product__image--main">
+            <img class="product__image__main" src="{{product?.mainImage}}" alt="main image">
+          </div>
+        </div>
+        <div class="product__aside--container col-md-8 col-sm-12 col-lg-8 col-xs-12">
+          <div class="aside-one ">
+            <div dir="rtl" class="text--bold mr-4">{{product.attributes.title}}</div>
+            <div class="aside__chat">
+              <img class="aside__chat__image" src="../../../../assets/icons/chat.png"/>
+              <div class="aside__chat__text">Contact Seller</div>
+            </div>
+          </div>
+          <div class="aside-second aside-one">
+            <div class="aside-one__price text--bold--price ">{{product.attributes.pricedisplay}}</div>
+            <div class="aside__share">
+              <div class="aside__share__element">
+                <img class="aside__share__image" src="../../../../assets/icons/heart.png"/>
+                <div class="muted--text">{{product.attributes.totalfavorites}}</div>
+              </div>
+              <div class="aside__share__element">
+                <!--height="42" width="44"-->
+                <img class="aside__share__image" src="../../../../assets/icons/sharer.png"/>
+                <div class="muted--text">{{product.attributes.totalshares}}</div>
+              </div>
+              <div class="aside__share__element">
+                <img class="aside__share__image" src="../../../../assets/icons/eye.png"/>
+                <div class="muted--text">{{product.attributes.totalview}}</div>
+                <!--height="24" width="43"-->
+              </div>
+            </div>
+          </div>
+          <div class="aside-third col-sm-12 col-xs-12">
+            <div class="aside-third__images">
+              <div *ngFor="let image of product.attributes.images" class="image--element">
+                <img class="image" (click)="changeMainImage(image)" src="{{image.url}}" alt="image">
+              </div>
+            </div>
+            <div class="aside-third--stars col-sm-12 col-xs-12">
+              <div class="aside-third__stars">
+                <!--height="31"-->
+                <!--width="33"-->
+                <img class=" aside-third__stars--image" src="../../../../assets/icons/red-star.png"/>
+                <img class=" aside-third__stars--image" src="../../../../assets/icons/red-star.png"/>
+                <img class=" aside-third__stars--image" src="../../../../assets/icons/red-star.png"/>
+                <img class=" aside-third__stars--image" src="../../../../assets/icons/red-star.png"/>
+                <img class=" aside-third__stars--image" src="../../../../assets/icons/grey-star.png"/>
+              </div>
+              <div class="side-third__text muted--text">Rate Product</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="second-three-line">
+        <div class="description col-md-12 col-sm-12 col-lg-12 col-xs-12 ">
+          <!--<div class="category d-flex align-items-center justify-content-center">-->
+          <!--<img class="category__image" src="../../../../assets/icons/category-button.png" height="95" width="75"/>-->
+          <!--</div>-->
+          <div class="button-text-wrapper">
+            <div class="wrapper-button-category category-hover"
+                 routerLink="/category/{{product.attributes.categoryname}}"
+                 routerLinkActive="category-hover">
+              <img class="image__button-category" src="{{currentCategoryImage}}" alt="">
+            </div>
+            <div class="button--text">{{product.attributes.categoryname}}</div>
+          </div>
+          <div dir="rtl" class="text--bold mr-4">{{product.attributes.descriptiondisplay}}</div>
+        </div>
+        <div
+          class="map-line col-md-12 col-sm-12 col-lg-12 col-xs-12 d-flex align-items-center justify-content-between flex-wrap">
+          <div
+            class="wrapper-car-invoice-place col-md-8 col-sm-12 col-lg-8 col-xs-12 d-flex align-items-end justify-content-around flex-row">
+            <div class="car d-flex align-items-center justify-content-center flex-column ">
+              <!--<div class="img-container">-->
+              <img class="car__image" src="../../../../assets/icons/car.png"/>
+              <!--</div>-->
+              <div class="text">Include Shipping</div>
+            </div>
+            <div class="invoice   d-flex align-items-center justify-content-center flex-column">
+
+              <img class="invoice__image" src="../../../../assets/icons/invoice.png"/>
+              <div class="text">Include Invoice</div>
+
+            </div>
+            <div class="place  d-flex align-items-center justify-content-center flex-column">
+              <div class="place__place-text d-flex align-items-center justify-content-center flex-row">
+                <img class="place__image" src="../../../../assets/icons/place.png"/>
+                <div dir="rtl" class="text--bold ml-1">{{product.attributes.city}}</div>
+              </div>
+              <div dir="rtl" class="text--bold distance">
+                <span class="km-value">
+                  <span>{{(product.attributes.distance) | number :'1.0-0'}}</span>
+                <span class="ml-2 text">km</span>
+              </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="map  wrapper-map col-md-4 col-sm-12 col-lg-4 col-xs-12 d-flex align-items-center justify-content-between flex-row">
+
+            <!--height="286" width="305"-->
+            <img class="map__image" src="../../../../assets/icons/map-example.png"/>
+          </div>
+
+        </div>
+        <div class="arrows col-md-12 col-sm-12 col-lg-12 col-xs-12 d-flex align-items-center justify-content-between">
+          <div [class.disabled]="relatedProd != undefined && currentRelatedProductNumber === 0" (click)="prevRelatedProduct()"
+                  class=" btn btn-outline-light arrow-left d-flex justify-content-center align-items-center flex-column">
+
+            <img src="../../../../assets/icons/arrow-red-left.png" height="35" width="20"/>
+            <div class="text-red">More from seller</div>
+          </div>
+          <div class="seller-product d-flex justify-content-center align-items-center flex-column">
+            <div class="d-flex justify-content-center align-items-center flex-row">
+              <div *ngFor="let dot of dots; let i = index" >
+                <div *ngIf="i > currentRelatedProductNumber - 3 && i < currentRelatedProductNumber + 3"
+                     class="red d-flex justify-content-center align-items-center">
+                  <img *ngIf="dot.value==='redDot'" class="ml-1 " src="../../../../assets/icons/dot-red.png" height="12"
+                       width="12"/>
+                  <img *ngIf="dot.value==='dot'" class="ml-1" src="../../../../assets/icons/dot-grey.png" height="12"
+                       width="12"/>
+                </div>
+              </div>
+            </div>
+            <!--<div class="text-red">Seller`s Products</div>-->
+          </div>
+          <div [class.disabled]="relatedProd != undefined && currentRelatedProductNumber >= relatedProd.length - 1" (click)="nextRelatedProduct()"
+               class="btn btn-outline-light arrow-right d-flex justify-content-center align-items-center flex-column">
+            <img src="../../../../assets/icons/arrow-right-red.png" height="35" width="20"/>
+            <div class=" text-red">More from seller</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="buttons">
+    <div dir="rtl" class="button-wrapper d-flex align-items-center  flex-row flex-wrap  mb-4">
+      <button type="button" *ngFor="let button of product?.attributes.tags"
+              class=" btn btn-danger button--element">{{button.text}}</button>
+    </div>
+  </section>
+</div>
